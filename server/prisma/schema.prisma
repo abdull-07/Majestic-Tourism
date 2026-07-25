@@ -1,20 +1,372 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-
 model TestPing {
   id        String   @id @default(cuid())
   message   String
   createdAt DateTime @default(now())
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum Role {
+  CUSTOMER
+  STAFF
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum TourCategory {
+  FAMILY
+  HONEYMOON
+  GROUP
+  ADVENTURE
+  BUDGET
+  LUXURY
+}
+
+enum DifficultyLevel {
+  EASY
+  MODERATE
+  CHALLENGING
+}
+
+enum AvailabilityStatus {
+  OPEN
+  FILLING_FAST
+  SOLD_OUT
+  CLOSED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  EXPIRED
+}
+
+enum PaymentMethod {
+  JAZZCASH
+  EASYPAISA
+  BANK_TRANSFER
+  STRIPE
+}
+
+enum PaymentStatus {
+  PENDING
+  VERIFIED
+  FAILED
+  REFUNDED
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
+}
+
+// ============================================
+// AUTH & USERS
+// ============================================
+
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  password        String
+  fullName        String
+  phone           String?
+  role            Role     @default(CUSTOMER)
+  isEmailVerified Boolean  @default(false)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  bookings         Booking[]
+  reviews          Review[]
+  wishlist         Wishlist[]
+  blogPosts        BlogPost[]     @relation("BlogAuthor")
+  refreshTokens    RefreshToken[]
+  verifiedPayments Payment[]      @relation("PaymentVerifiedBy")
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("refresh_tokens")
+}
+
+// ============================================
+// DESTINATIONS
+// ============================================
+
+model Destination {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  description     String
+  coverImage      String?
+  bestTimeToVisit String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  tours Tour[]
+
+  @@map("destinations")
+}
+
+// ============================================
+// TOURS
+// ============================================
+
+model Tour {
+  id              String          @id @default(cuid())
+  title           String
+  slug            String          @unique
+  description     String
+  destinationId   String
+  destination     Destination     @relation(fields: [destinationId], references: [id])
+  category        TourCategory
+  difficultyLevel DifficultyLevel @default(EASY)
+  durationDays    Int
+  durationNights  Int
+  minGroupSize    Int             @default(1)
+  maxGroupSize    Int
+  basePrice       Decimal         @db.Decimal(10, 2)
+  childPrice      Decimal?        @db.Decimal(10, 2)
+  inclusions      String[]
+  exclusions      String[]
+  isFeatured      Boolean         @default(false)
+  isActive        Boolean         @default(true)
+  metaTitle       String?
+  metaDescription String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  itinerary    TourItinerary[]
+  images       TourImage[]
+  availability TourAvailability[]
+  bookings     Booking[]
+  reviews      Review[]
+  wishlist     Wishlist[]
+
+  @@map("tours")
+}
+
+model TourItinerary {
+  id          String @id @default(cuid())
+  tourId      String
+  tour        Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  dayNumber   Int
+  title       String
+  description String
+
+  @@unique([tourId, dayNumber])
+  @@map("tour_itinerary")
+}
+
+model TourImage {
+  id        String   @id @default(cuid())
+  tourId    String
+  tour      Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  url       String
+  publicId  String
+  isCover   Boolean  @default(false)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@map("tour_images")
+}
+
+model TourAvailability {
+  id            String             @id @default(cuid())
+  tourId        String
+  tour          Tour               @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  departureDate DateTime
+  totalSeats    Int
+  bookedSeats   Int                @default(0)
+  status        AvailabilityStatus @default(OPEN)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  bookings Booking[]
+
+  @@unique([tourId, departureDate])
+  @@map("tour_availability")
+}
+
+// ============================================
+// BOOKINGS & PAYMENTS
+// ============================================
+
+model Booking {
+  id             String           @id @default(cuid())
+  bookingNumber  String           @unique
+  userId         String?
+  user           User?            @relation(fields: [userId], references: [id])
+  tourId         String
+  tour           Tour             @relation(fields: [tourId], references: [id])
+  availabilityId String
+  availability   TourAvailability @relation(fields: [availabilityId], references: [id])
+
+  adults      Int
+  children    Int           @default(0)
+  totalAmount Decimal       @db.Decimal(10, 2)
+  status      BookingStatus @default(PENDING)
+
+  guestName  String?
+  guestEmail String?
+  guestPhone String?
+
+  couponId String?
+  coupon   Coupon? @relation(fields: [couponId], references: [id])
+
+  holdExpiresAt DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  payments Payment[]
+  review   Review?
+
+  @@map("bookings")
+}
+
+model Payment {
+  id             String        @id @default(cuid())
+  bookingId      String
+  booking        Booking       @relation(fields: [bookingId], references: [id])
+  method         PaymentMethod
+  amount         Decimal       @db.Decimal(10, 2)
+  status         PaymentStatus @default(PENDING)
+  transactionRef String?
+  proofUrl       String?
+  verifiedById   String?
+  verifiedBy     User?         @relation("PaymentVerifiedBy", fields: [verifiedById], references: [id])
+  verifiedAt     DateTime?
+  createdAt      DateTime      @default(now())
+
+  @@map("payments")
+}
+
+// ============================================
+// REVIEWS
+// ============================================
+
+model Review {
+  id        String       @id @default(cuid())
+  userId    String
+  user      User         @relation(fields: [userId], references: [id])
+  tourId    String
+  tour      Tour         @relation(fields: [tourId], references: [id])
+  bookingId String       @unique
+  booking   Booking      @relation(fields: [bookingId], references: [id])
+  rating    Int
+  comment   String
+  images    String[]
+  status    ReviewStatus @default(PENDING)
+  createdAt DateTime     @default(now())
+
+  @@map("reviews")
+}
+
+// ============================================
+// BLOG / CMS
+// ============================================
+
+model BlogPost {
+  id              String     @id @default(cuid())
+  title           String
+  slug            String     @unique
+  content         String
+  coverImage      String?
+  authorId        String
+  author          User       @relation("BlogAuthor", fields: [authorId], references: [id])
+  status          BlogStatus @default(DRAFT)
+  metaTitle       String?
+  metaDescription String?
+  publishedAt     DateTime?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@map("blog_posts")
+}
+
+// ============================================
+// WISHLIST
+// ============================================
+
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tourId    String
+  tour      Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, tourId])
+  @@map("wishlist")
+}
+
+// ============================================
+// COUPONS
+// ============================================
+
+model Coupon {
+  id            String       @id @default(cuid())
+  code          String       @unique
+  discountType  DiscountType
+  discountValue Decimal      @db.Decimal(10, 2)
+  minAmount     Decimal?     @db.Decimal(10, 2)
+  maxUses       Int?
+  usedCount     Int          @default(0)
+  validFrom     DateTime
+  validTo       DateTime
+  isActive      Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+
+  bookings Booking[]
+
+  @@map("coupons")
+}
+
+// ============================================
+// SITE SETTINGS
+// ============================================
+
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+
+  @@map("site_settings")
 }
