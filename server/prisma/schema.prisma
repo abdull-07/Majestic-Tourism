@@ -2,9 +2,10 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider     = "prisma-client"
-  output       = "../src/generated/prisma"
-  moduleFormat = "cjs"
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "cjs"
+  importFileExtension = "js"
 }
 
 datasource db {
@@ -96,7 +97,7 @@ model User {
   id              String   @id @default(cuid())
   email           String   @unique
   password        String
-  Name            String
+  fullName        String
   phone           String?
   role            Role     @default(CUSTOMER)
   isEmailVerified Boolean  @default(false)
