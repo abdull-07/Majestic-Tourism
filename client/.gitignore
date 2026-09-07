@@ -1,0 +1,122 @@
+# ==========================================
+# Operating System Files
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ==========================================
+# IDEs and Code Editors
+# ==========================================
+# Visual Studio Code
+.vscode/
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# JetBrains (IntelliJ, WebStorm, PyCharm, etc.)
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.metadata/
+bin/
+tmp/
+.tmp/
+.classpath
+.project
+.settings/
+
+# Sublime Text / Vim
+*.sublime-project
+*.sublime-workspace
+.*.swp
+.*.swo
+.netrwhist
+
+# ==========================================
+# Common Packages & Dependencies
+# ==========================================
+# Node.js
+node_modules/
+jspm_packages/
+.npm
+.eslintcache
+.stylelintcache
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PHP / Composer
+vendor/
+.phpunit.result.cache
+
+# Java / Maven / Gradle
+.gradle/
+build/
+target/
+.mvn/
+
+# Ruby
+.bundle/
+vendor/bundle/
+log/
+tmp/
+
+# ==========================================
+# Logs, Databases, and Storage
+# ==========================================
+*.log
+log9.txt
+*.sqlite
+*.db
+*.dump
+*.sql
+
+# ==========================================
+# Environment Variables & Secrets (CRITICAL)
+# ==========================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+*.cert
+secret.txt
+credentials.txt
