@@ -1,13 +1,23 @@
+import { Routes, Route } from 'react-router-dom';
+import PublicLayout from './layouts/PublicLayout';
+import Home from './pages/public/Home';
+import About from './pages/public/About';
+import TourListing from './pages/public/TourListing';
+import DestinationsListing from './pages/public/DestinationsListing';
+import TourDetail from './pages/public/TourDetail';
+import DestinationDetail from './pages/public/DestinationDetail';
+
 export default function App() {
   return (
-    <div className="p-8 space-y-4 bg-surface min-h-screen">
-      <h1 className="text-headline-md text-primary">Majestic Tourism</h1>
-      <button className="btn-primary">Primary Button</button>
-      <button className="btn-secondary">Secondary Button</button>
-      <div className="card max-w-sm">
-        <span className="chip bg-tertiary-container text-on-tertiary-container">Trending</span>
-        <p className="text-body-md text-text-muted mt-2">Card with soft shadow, no border.</p>
-      </div>
-    </div>
+    <Routes>
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/tours" element={<TourListing />} />
+        <Route path="/tours/:slug" element={<TourDetail />} />
+        <Route path="/destinations" element={<DestinationsListing /> } />
+        <Route path="/destinations/:slug" element={<DestinationDetail />} /> 
+      </Route>
+    </Routes>
   );
 }
