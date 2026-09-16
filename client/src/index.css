@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* ---------- Fonts ---------- */
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* ---------- Colors — Surface ---------- */
+  --color-background: #f7f9fb;
+  --color-on-background: #191c1e;
+  --color-surface: #f7f9fb;
+  --color-surface-dim: #d8dadc;
+  --color-surface-bright: #f7f9fb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
+  --color-surface-container-high: #e6e8ea;
+  --color-surface-container-highest: #e0e3e5;
+  --color-surface-variant: #e0e3e5;
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #404944;
+  --color-inverse-surface: #2d3133;
+  --color-inverse-on-surface: #eff1f3;
+  --color-surface-tint: #2b6954;
+
+  /* ---------- Outline ---------- */
+  --color-outline: #707974;
+  --color-outline-variant: #bfc9c3;
+
+  /* ---------- Primary ---------- */
+  --color-primary: #003527;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #064e3b;
+  --color-on-primary-container: #80bea6;
+  --color-inverse-primary: #95d3ba;
+  --color-primary-fixed: #b0f0d6;
+  --color-primary-fixed-dim: #95d3ba;
+  --color-on-primary-fixed: #002117;
+  --color-on-primary-fixed-variant: #0b513d;
+
+  /* ---------- Secondary ---------- */
+  --color-secondary: #006591;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #39b8fd;
+  --color-on-secondary-container: #004666;
+  --color-secondary-fixed: #c9e6ff;
+  --color-secondary-fixed-dim: #89ceff;
+  --color-on-secondary-fixed: #001e2f;
+  --color-on-secondary-fixed-variant: #004c6e;
+
+  /* ---------- Tertiary ---------- */
+  --color-tertiary: #442800;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #623c00;
+  --color-on-tertiary-container: #f69f0d;
+  --color-tertiary-fixed: #ffddb8;
+  --color-tertiary-fixed-dim: #ffb95f;
+  --color-on-tertiary-fixed: #2a1700;
+  --color-on-tertiary-fixed-variant: #653e00;
+
+  /* ---------- Error ---------- */
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  /* ---------- Text ---------- */
+  --color-text-main: #1e293b;
+  --color-text-muted: #64748b;
+
+  /* ---------- Misc ---------- */
+  --color-glass-stroke: rgba(255, 255, 255, 0.4);
+  --color-mountain-mist: #e2e8f0;
+
+  /* ---------- Typography scale ---------- */
+  --text-display-lg: 48px;
+  --text-display-lg--line-height: 56px;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+
+  --text-display-lg-mobile: 36px;
+  --text-display-lg-mobile--line-height: 42px;
+  --text-display-lg-mobile--letter-spacing: -0.02em;
+  --text-display-lg-mobile--font-weight: 700;
+
+  --text-headline-md: 32px;
+  --text-headline-md--line-height: 40px;
+  --text-headline-md--font-weight: 600;
+
+  --text-headline-sm: 24px;
+  --text-headline-sm--line-height: 32px;
+  --text-headline-sm--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-label--letter-spacing: 0.08em;
+  --text-label--font-weight: 600;
+
+  /* ---------- Spacing additions (base 4px scale already matches Tailwind's default — no override needed) ---------- */
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 48px;
+
+  /* ---------- Radius ---------- */
+  --radius: 8px;
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ---------- Shadows ---------- */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.10), 0 6px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* container-max stays a plain CSS variable — Tailwind v4 reserves the --container-*
+   theme namespace for @container query sizes, not max-w-*, so this can't safely
+   become an auto-generated max-w-container-max utility. Use the .container class
+   below, or an arbitrary value (max-w-[1280px]) directly. */
+:root {
+  --container-max: 1280px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-text-main);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-fixed);
+    color: var(--color-on-primary-fixed);
+  }
+}
+
+@layer components {
+  .wrapper {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--spacing-margin-desktop);
+  }
+
+  .card {
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-glass-stroke);
+  }
+
+  /* Tailwind's --text-* metadata doesn't support text-transform, so `label`
+     needs both the auto-generated size utility and this manual uppercase pairing. */
+  .label {
+    @apply text-label uppercase;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: var(--spacing-margin-mobile);
+  }
+}
