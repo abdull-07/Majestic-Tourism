@@ -27,6 +27,7 @@ const TourNew = lazy(() => import('./pages/admin/tours/TourNew'));
 const TourEdit = lazy(() => import('./pages/admin/tours/TourEdit'));
 const BookingsList = lazy(() => import('./pages/admin/bookings/BookingsList'));
 const BookingDetail = lazy(() => import('./pages/admin/bookings/BookingDetail'));
+const PaymentsList = lazy(() => import('./pages/admin/payments/PaymentsList'));
 
 function PageLoader() {
   return (
@@ -70,6 +71,8 @@ export default function App() {
 
             <Route path="bookings" element={<BookingsList />} />
             <Route path="bookings/:id" element={<BookingDetail />} />
+
+            <Route path="payments" element={<PaymentsList />} />
           </Route>
         </Route>
       </Routes>
