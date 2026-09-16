@@ -5,6 +5,7 @@ export interface Destination {
     description: string;
     coverImage: string | null;
     bestTimeToVisit: string | null;
+        isActive: boolean;
     _count?: { tours: number };
 }
 

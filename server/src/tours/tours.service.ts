@@ -4,6 +4,7 @@ import { CreateTourDto } from './dto/create-tour.dto';
 import { UpdateTourDto } from './dto/update-tour.dto';
 import { CreateItineraryDayDto, UpdateItineraryDayDto } from './dto/tour-itinerary.dto';
 import { CreateAvailabilityDto, UpdateAvailabilityDto } from './dto/tour-availability.dto';
+import { AddTourImageDto } from './dto/tour-image.dto';
 
 @Injectable()
 export class ToursService {
@@ -217,4 +218,45 @@ export class ToursService {
 
         return this.prisma.tourAvailability.delete({ where: { id: availabilityId } });
     }
+    // ---- Admin: Images ----
+
+    async addImage(tourId: string, dto: AddTourImageDto) {
+        await this.findOne(tourId);
+
+        // If this is the first image for the tour, or explicitly marked as cover,
+        // unset any existing cover so there's only ever one.
+        if (dto.isCover) {
+            await this.prisma.tourImage.updateMany({ where: { tourId }, data: { isCover: false } });
+        }
+
+        const existingCount = await this.prisma.tourImage.count({ where: { tourId } });
+
+        return this.prisma.tourImage.create({
+            data: {
+                tourId,
+                url: dto.url,
+                publicId: dto.publicId,
+                isCover: dto.isCover ?? existingCount === 0, // first image defaults to cover
+                sortOrder: existingCount,
+            },
+        });
+    }
+
+    async setCoverImage(imageId: string) {
+        const image = await this.prisma.tourImage.findUnique({ where: { id: imageId } });
+        if (!image) throw new NotFoundException('Image not found');
+
+        await this.prisma.tourImage.updateMany({ where: { tourId: image.tourId }, data: { isCover: false } });
+        return this.prisma.tourImage.update({ where: { id: imageId }, data: { isCover: true } });
+    }
+
+    async removeImage(imageId: string) {
+        const image = await this.prisma.tourImage.findUnique({ where: { id: imageId } });
+        if (!image) throw new NotFoundException('Image not found');
+
+        // Note: this removes the DB record only — the file itself stays in Cloudinary.
+        // Same known limitation as Destination.coverImage; acceptable for now.
+        return this.prisma.tourImage.delete({ where: { id: imageId } });
+    }
 }
+
