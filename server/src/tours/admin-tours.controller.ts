@@ -10,6 +10,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from '../generated/prisma/client';
+import { AddTourImageDto } from './dto/tour-image.dto';
 
 @Controller('admin/tours')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -72,5 +73,20 @@ export class AdminToursController {
     @Delete('availability/:availabilityId')
     removeAvailability(@Param('availabilityId') availabilityId: string) {
         return this.toursService.removeAvailability(availabilityId);
+    }
+
+    @Post(':id/images')
+    addImage(@Param('id') id: string, @Body() dto: AddTourImageDto) {
+        return this.toursService.addImage(id, dto);
+    }
+
+    @Patch('images/:imageId/cover')
+    setCoverImage(@Param('imageId') imageId: string) {
+        return this.toursService.setCoverImage(imageId);
+    }
+
+    @Delete('images/:imageId')
+    removeImage(@Param('imageId') imageId: string) {
+        return this.toursService.removeImage(imageId);
     }
 }

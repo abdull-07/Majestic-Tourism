@@ -1,301 +1,199 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap");
+@import "tailwindcss";
 
-:root {
-  /* =========================================================
-     TODO: COLORS
-  ========================================================= */
-
-  /* Surface */
-  --background: #f7f9fb;
-  --on-background: #191c1e;
-
-  --surface: #f7f9fb;
-  --surface-dim: #d8dadc;
-  --surface-bright: #f7f9fb;
-
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f2f4f6;
-  --surface-container: #eceef0;
-  --surface-container-high: #e6e8ea;
-  --surface-container-highest: #e0e3e5;
-
-  --surface-variant: #e0e3e5;
-
-  --on-surface: #191c1e;
-  --on-surface-variant: #404944;
-
-  --inverse-surface: #2d3133;
-  --inverse-on-surface: #eff1f3;
-
-  --surface-tint: #2b6954;
-
-  /* Outline */
-  --outline: #707974;
-  --outline-variant: #bfc9c3;
-
-  /* Primary */
-  --primary: #003527;
-  --on-primary: #ffffff;
-
-  --primary-container: #064e3b;
-  --on-primary-container: #80bea6;
-
-  --inverse-primary: #95d3ba;
-
-  --primary-fixed: #b0f0d6;
-  --primary-fixed-dim: #95d3ba;
-
-  --on-primary-fixed: #002117;
-  --on-primary-fixed-variant: #0b513d;
-
-  /* Secondary */
-  --secondary: #006591;
-  --on-secondary: #ffffff;
-
-  --secondary-container: #39b8fd;
-  --on-secondary-container: #004666;
-
-  --secondary-fixed: #c9e6ff;
-  --secondary-fixed-dim: #89ceff;
-
-  --on-secondary-fixed: #001e2f;
-  --on-secondary-fixed-variant: #004c6e;
-
-  /* Tertiary */
-  --tertiary: #442800;
-  --on-tertiary: #ffffff;
-
-  --tertiary-container: #623c00;
-  --on-tertiary-container: #f69f0d;
-
-  --tertiary-fixed: #ffddb8;
-  --tertiary-fixed-dim: #ffb95f;
-
-  --on-tertiary-fixed: #2a1700;
-  --on-tertiary-fixed-variant: #653e00;
-
-  /* Error */
-  --error: #ba1a1a;
-  --on-error: #ffffff;
-
-  --error-container: #ffdad6;
-  --on-error-container: #93000a;
-
-  /* Text */
-  --text-main: #1e293b;
-  --text-muted: #64748b;
-
-  /* Misc */
-  --glass-stroke: rgba(255, 255, 255, 0.4);
-  --mountain-mist: #e2e8f0;
-
-  /* =========================================================
-     TODO: TYPOGRAPHY
-  ========================================================= */
-
+@theme {
+  /* ---------- Fonts ---------- */
   --font-heading: "Montserrat", sans-serif;
   --font-body: "Inter", sans-serif;
 
-  --display-lg-size: 48px;
-  --display-lg-line: 56px;
-  --display-lg-weight: 700;
+  /* ---------- Colors — Surface ---------- */
+  --color-background: #f7f9fb;
+  --color-on-background: #191c1e;
+  --color-surface: #f7f9fb;
+  --color-surface-dim: #d8dadc;
+  --color-surface-bright: #f7f9fb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
+  --color-surface-container-high: #e6e8ea;
+  --color-surface-container-highest: #e0e3e5;
+  --color-surface-variant: #e0e3e5;
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #404944;
+  --color-inverse-surface: #2d3133;
+  --color-inverse-on-surface: #eff1f3;
+  --color-surface-tint: #2b6954;
 
-  --display-lg-mobile-size: 36px;
-  --display-lg-mobile-line: 42px;
+  /* ---------- Outline ---------- */
+  --color-outline: #707974;
+  --color-outline-variant: #bfc9c3;
 
-  --headline-md-size: 32px;
-  --headline-md-line: 40px;
-  --headline-md-weight: 600;
+  /* ---------- Primary ---------- */
+  --color-primary: #003527;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #064e3b;
+  --color-on-primary-container: #80bea6;
+  --color-inverse-primary: #95d3ba;
+  --color-primary-fixed: #b0f0d6;
+  --color-primary-fixed-dim: #95d3ba;
+  --color-on-primary-fixed: #002117;
+  --color-on-primary-fixed-variant: #0b513d;
 
-  --headline-sm-size: 24px;
-  --headline-sm-line: 32px;
-  --headline-sm-weight: 600;
+  /* ---------- Secondary ---------- */
+  --color-secondary: #006591;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #39b8fd;
+  --color-on-secondary-container: #004666;
+  --color-secondary-fixed: #c9e6ff;
+  --color-secondary-fixed-dim: #89ceff;
+  --color-on-secondary-fixed: #001e2f;
+  --color-on-secondary-fixed-variant: #004c6e;
 
-  --body-lg-size: 18px;
-  --body-lg-line: 28px;
+  /* ---------- Tertiary ---------- */
+  --color-tertiary: #442800;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #623c00;
+  --color-on-tertiary-container: #f69f0d;
+  --color-tertiary-fixed: #ffddb8;
+  --color-tertiary-fixed-dim: #ffb95f;
+  --color-on-tertiary-fixed: #2a1700;
+  --color-on-tertiary-fixed-variant: #653e00;
 
-  --body-md-size: 16px;
-  --body-md-line: 24px;
+  /* ---------- Error ---------- */
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
 
-  --body-sm-size: 14px;
-  --body-sm-line: 20px;
+  /* ---------- Text ---------- */
+  --color-text-main: #1e293b;
+  --color-text-muted: #64748b;
 
-  --label-size: 12px;
-  --label-line: 16px;
-  --label-weight: 600;
-  --label-spacing: 0.08em;
+  /* ---------- Misc ---------- */
+  --color-glass-stroke: rgba(255, 255, 255, 0.4);
+  --color-mountain-mist: #e2e8f0;
 
-  /* =========================================================
-     TODO: SPACING
-  ========================================================= */
+  /* ---------- Typography scale ---------- */
+  --text-display-lg: 48px;
+  --text-display-lg--line-height: 56px;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
 
-  --space-base: 8px;
+  --text-display-lg-mobile: 36px;
+  --text-display-lg-mobile--line-height: 42px;
+  --text-display-lg-mobile--letter-spacing: -0.02em;
+  --text-display-lg-mobile--font-weight: 700;
 
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
+  --text-headline-md: 32px;
+  --text-headline-md--line-height: 40px;
+  --text-headline-md--font-weight: 600;
 
-  --gutter: 24px;
-  --container-max: 1280px;
-  --margin-mobile: 16px;
-  --margin-desktop: 48px;
+  --text-headline-sm: 24px;
+  --text-headline-sm--line-height: 32px;
+  --text-headline-sm--font-weight: 600;
 
-  /* =========================================================
-     TODO: BORDER RADIUS
-  ========================================================= */
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
 
-  --radius-sm: 4px;
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-label--letter-spacing: 0.08em;
+  --text-label--font-weight: 600;
+
+  /* ---------- Spacing additions (base 4px scale already matches Tailwind's default — no override needed) ---------- */
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 48px;
+
+  /* ---------- Radius ---------- */
   --radius: 8px;
+  --radius-sm: 4px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* =========================================================
-    TODO:  SHADOWS
-  ========================================================= */
-
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, .04);
-
-  --shadow-sm:
-    0 1px 3px rgba(0, 0, 0, .08),
-    0 1px 2px rgba(0, 0, 0, .04);
-
-  --shadow-md:
-    0 4px 8px rgba(0, 0, 0, .08),
-    0 2px 4px rgba(0, 0, 0, .05);
-
-  --shadow-lg:
-    0 10px 20px rgba(0, 0, 0, .10),
-    0 6px 6px rgba(0, 0, 0, .06);
+  /* ---------- Shadows ---------- */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.10), 0 6px 6px rgba(0, 0, 0, 0.06);
 }
 
-/* =========================================================
-   TODO: RESET
-========================================================= */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* container-max stays a plain CSS variable — Tailwind v4 reserves the --container-*
+   theme namespace for @container query sizes, not max-w-*, so this can't safely
+   become an auto-generated max-w-container-max utility. Use the .container class
+   below, or an arbitrary value (max-w-[1280px]) directly. */
+:root {
+  --container-max: 1280px;
 }
 
-html {
-  font-family: var(--font-body);
-  scroll-behavior: smooth;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-text-main);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-fixed);
+    color: var(--color-on-primary-fixed);
+  }
 }
 
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--text-main);
-  font-size: var(--body-md-size);
-  line-height: var(--body-md-line);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer components {
+  .wrapper {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--spacing-margin-desktop);
+  }
+
+  .card {
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-glass-stroke);
+  }
+
+  /* Tailwind's --text-* metadata doesn't support text-transform, so `label`
+     needs both the auto-generated size utility and this manual uppercase pairing. */
+  .label {
+    @apply text-label uppercase;
+  }
 }
-
-/* =========================================================
-   TODO: TYPOGRAPHY
-========================================================= */
-
-.display-lg {
-  font-family: var(--font-heading);
-  font-size: var(--display-lg-size);
-  font-weight: var(--display-lg-weight);
-  line-height: var(--display-lg-line);
-  letter-spacing: -0.02em;
-}
-
-.headline-md {
-  font-family: var(--font-heading);
-  font-size: var(--headline-md-size);
-  font-weight: var(--headline-md-weight);
-  line-height: var(--headline-md-line);
-}
-
-.headline-sm {
-  font-family: var(--font-heading);
-  font-size: var(--headline-sm-size);
-  font-weight: var(--headline-sm-weight);
-  line-height: var(--headline-sm-line);
-}
-
-.body-lg {
-  font-size: var(--body-lg-size);
-  line-height: var(--body-lg-line);
-}
-
-.body-md {
-  font-size: var(--body-md-size);
-  line-height: var(--body-md-line);
-}
-
-.body-sm {
-  font-size: var(--body-sm-size);
-  line-height: var(--body-sm-line);
-}
-
-.label {
-  font-size: var(--label-size);
-  line-height: var(--label-line);
-  font-weight: var(--label-weight);
-  letter-spacing: var(--label-spacing);
-  text-transform: uppercase;
-}
-
-/* =========================================================
-   TODO: COMMON COMPONENTS
-========================================================= */
-
-.container {
-  max-width: var(--container-max);
-  margin-inline: auto;
-  padding-inline: var(--margin-desktop);
-}
-
-.card {
-  background: var(--surface-container-lowest);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--outline-variant);
-  box-shadow: var(--shadow-sm);
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-  border: none;
-}
-
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-::selection {
-  background: var(--primary-fixed);
-  color: var(--on-primary-fixed);
-}
-
-/* =========================================================
-   TODO: RESPONSIVE
-========================================================= */
 
 @media (max-width: 768px) {
   .container {
-    padding-inline: var(--margin-mobile);
-  }
-
-  .display-lg {
-    font-size: var(--display-lg-mobile-size);
-    line-height: var(--display-lg-mobile-line);
+    padding-inline: var(--spacing-margin-mobile);
   }
 }
