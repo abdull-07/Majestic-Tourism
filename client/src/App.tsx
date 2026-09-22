@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
+import UsersList from './pages/admin/users/UsersList';
 
 // Public pages — lazy loaded
 const Home = lazy(() => import('./pages/public/Home'));
@@ -29,6 +30,8 @@ const BookingsList = lazy(() => import('./pages/admin/bookings/BookingsList'));
 const BookingDetail = lazy(() => import('./pages/admin/bookings/BookingDetail'));
 const PaymentsList = lazy(() => import('./pages/admin/payments/PaymentsList'));
 const ReviewsList = lazy(() => import('./pages/admin/reviews/ReviewsList'));
+const BlogList = lazy(() => import('./pages/admin/blog/BlogList'));
+const BlogForm = lazy(() => import('./pages/admin/blog/BlogForm'));
 
 function PageLoader() {
   return (
@@ -76,6 +79,12 @@ export default function App() {
             <Route path="payments" element={<PaymentsList />} />
 
             <Route path="reviews" element={<ReviewsList />} />
+
+            <Route path="blog" element={<BlogList />} />
+            <Route path="blog/new" element={<BlogForm />} />
+            <Route path="blog/:id/edit" element={<BlogForm />} />
+
+            <Route path="users" element={<UsersList />} />
           </Route>
         </Route>
       </Routes>
