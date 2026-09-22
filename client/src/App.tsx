@@ -3,8 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
-import ProtectedRoute from './components/ProtectedRoute';
-import UsersList from './pages/admin/users/UsersList';
 
 // Public pages — lazy loaded
 const Home = lazy(() => import('./pages/public/Home'));
@@ -32,6 +30,11 @@ const PaymentsList = lazy(() => import('./pages/admin/payments/PaymentsList'));
 const ReviewsList = lazy(() => import('./pages/admin/reviews/ReviewsList'));
 const BlogList = lazy(() => import('./pages/admin/blog/BlogList'));
 const BlogForm = lazy(() => import('./pages/admin/blog/BlogForm'));
+const ProtectedRoute = lazy(()=>import( './components/ProtectedRoute'));
+const UsersList = lazy(()=>import( './pages/admin/users/UsersList'));
+const CouponsList = lazy(()=>import( './pages/admin/coupons/CouponsList'));
+const CouponForm = lazy(()=>import( './pages/admin/coupons/CouponForm'));
+const SettingsPage = lazy(() => import('./pages/admin/settings/SettingsPage'));
 
 function PageLoader() {
   return (
@@ -85,6 +88,12 @@ export default function App() {
             <Route path="blog/:id/edit" element={<BlogForm />} />
 
             <Route path="users" element={<UsersList />} />
+
+            <Route path="coupons" element={<CouponsList />} />
+            <Route path="coupons/new" element={<CouponForm />} />
+            <Route path="coupons/:id/edit" element={<CouponForm />} />
+
+            <Route path="settings" element={<SettingsPage />} />
           </Route>
         </Route>
       </Routes>
