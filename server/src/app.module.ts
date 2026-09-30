@@ -14,10 +14,12 @@ import { UsersModule } from './users/users.module';
 import { MediaModule } from './media/media.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SettingsModule } from './settings/settings.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
     PrismaModule,
+    MailModule,
     AuthModule,
     DestinationsModule,
     ToursModule,

@@ -105,14 +105,30 @@ model User {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  bookings         Booking[]
-  reviews          Review[]
-  wishlist         Wishlist[]
-  blogPosts        BlogPost[]     @relation("BlogAuthor")
-  refreshTokens    RefreshToken[]
-  verifiedPayments Payment[]      @relation("PaymentVerifiedBy")
+  bookings                Booking[]
+  reviews                 Review[]
+  wishlist                Wishlist[]
+  blogPosts               BlogPost[]               @relation("BlogAuthor")
+  refreshTokens           RefreshToken[]
+  verifiedPayments        Payment[]                @relation("PaymentVerifiedBy")
+  emailVerificationTokens EmailVerificationToken[]
 
   @@map("users")
+}
+
+// ============================================
+// SMTP SETTINGS
+// ============================================
+
+model EmailVerificationToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("email_verification_tokens")
 }
 
 model RefreshToken {
