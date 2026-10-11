@@ -8,6 +8,7 @@ type User = {
     email: string;
     fullName?: string;
     role: Role;
+    isEmailVerified: boolean;
 };
 
 type AuthState = {

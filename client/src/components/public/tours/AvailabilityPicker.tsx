@@ -81,7 +81,7 @@ export default function AvailabilityPicker({ tourId, basePrice, childPrice, slot
 
             <div className="flex items-center justify-between border-t border-mountain-mist pt-4 mb-5">
                 <span className="text-body-md">Total</span>
-                <span className="text-headline-sm text-primary">${total.toLocaleString()}</span>
+                <span className="text-headline-sm text-primary">PKR {total.toLocaleString()}</span>
             </div>
 
             <button

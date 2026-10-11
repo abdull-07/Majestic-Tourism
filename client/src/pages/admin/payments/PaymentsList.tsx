@@ -91,7 +91,7 @@ export default function PaymentsList() {
                                     <td className="px-4 py-3 font-medium text-primary">{p.booking.bookingNumber}</td>
                                     <td className="px-4 py-3 text-text-muted">{p.booking.guestName || '—'}</td>
                                     <td className="px-4 py-3 text-on-surface">{p.method}</td>
-                                    <td className="px-4 py-3 text-secondary font-semibold">${Number(p.amount).toLocaleString()}</td>
+                                    <td className="px-4 py-3 text-secondary font-semibold">PKR {Number(p.amount).toLocaleString()}</td>
                                     <td className="px-4 py-3"><StatusBadge status={p.status} /></td>
                                     <td className="px-4 py-3 text-text-muted">{new Date(p.createdAt).toLocaleDateString()}</td>
                                     <td className="px-4 py-3">

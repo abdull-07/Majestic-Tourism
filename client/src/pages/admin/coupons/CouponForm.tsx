@@ -92,12 +92,12 @@ export default function CouponForm() {
                             className="w-full border border-mountain-mist rounded-lg px-4 py-2.5 text-body-md"
                         >
                             <option value="PERCENTAGE">Percentage (%)</option>
-                            <option value="FIXED">Fixed Amount ($)</option>
+                            <option value="FIXED">Fixed Amount (PKR)</option>
                         </select>
                     </div>
                     <div>
                         <label className="label text-primary mb-2 block">
-                            Value {form.discountType === 'PERCENTAGE' ? '(%)' : '($)'}
+                            Value {form.discountType === 'PERCENTAGE' ? '(%)' : '(PKR)'}
                         </label>
                         <input
                             type="number" min={0} required value={form.discountValue}

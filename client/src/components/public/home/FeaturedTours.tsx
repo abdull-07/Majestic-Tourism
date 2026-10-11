@@ -5,9 +5,9 @@ import { Clock, Users } from 'lucide-react';
 const categories = ['All', 'Luxury', 'Adventure'];
 
 const tours = [
-    { title: 'K2 Base Camp Expedition', price: '$2,450', duration: '14 Days', group: 'Max 10', category: 'Adventure', badge: 'Adventure', badgeBg: 'bg-primary', img: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=1000' },
-    { title: 'Hunza Valley Retreat', price: '$1,200', duration: '7 Days', group: 'Couples', category: 'Luxury', badge: 'Luxury Stays', badgeBg: 'bg-tertiary-container', img: 'https://images.unsplash.com/photo-1591825381179-6f2f4c1e1c0e?q=80&w=1000' },
-    { title: 'Hidden Skardu Gems', price: '$1,850', duration: '10 Days', group: 'Families', category: 'Adventure', badge: 'Cultural', badgeBg: 'bg-secondary', img: 'https://images.unsplash.com/photo-1580500550469-4a30e3f8ba7e?q=80&w=1000' },
+    { title: 'K2 Base Camp Expedition', price: 'PKR 682,000', duration: '14 Days', group: 'Max 10', category: 'Adventure', badge: 'Adventure', badgeBg: 'bg-primary', img: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=1000' },
+    { title: 'Hunza Valley Retreat', price: 'PKR 335,000', duration: '7 Days', group: 'Couples', category: 'Luxury', badge: 'Luxury Stays', badgeBg: 'bg-tertiary-container', img: 'https://images.unsplash.com/photo-1591825381179-6f2f4c1e1c0e?q=80&w=1000' },
+    { title: 'Hidden Skardu Gems', price: 'PKR 516,000', duration: '10 Days', group: 'Families', category: 'Adventure', badge: 'Cultural', badgeBg: 'bg-secondary', img: 'https://images.unsplash.com/photo-1580500550469-4a30e3f8ba7e?q=80&w=1000' },
 ];
 
 export default function FeaturedTours() {

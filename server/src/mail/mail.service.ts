@@ -9,12 +9,19 @@ for (const key of required) {
 @Injectable()
 export class MailService {
     private readonly logger = new Logger(MailService.name);
-    private transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT),
-        secure: Number(process.env.SMTP_PORT) === 465,
-        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-    });
+    private transporter: nodemailer.Transporter;
+
+    constructor() {
+        this.transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: parseInt(process.env.SMTP_PORT as string, 10),
+            secure: process.env.SMTP_PORT === '465',
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        });
+    }
 
     async sendVerificationEmail(to: string, fullName: string, token: string) {
         const verifyUrl = `${process.env.FRONTEND_URL}/verify-email/${token}`;

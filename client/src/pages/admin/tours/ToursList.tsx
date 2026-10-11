@@ -68,7 +68,7 @@ export default function ToursList() {
                                     <td className="px-4 py-3 font-medium text-on-surface">{t.title}</td>
                                     <td className="px-4 py-3 text-text-muted">{t.destination.name}</td>
                                     <td className="px-4 py-3 text-text-muted">{t.category}</td>
-                                    <td className="px-4 py-3 text-secondary font-semibold">${Number(t.basePrice).toLocaleString()}</td>
+                                    <td className="px-4 py-3 text-secondary font-semibold">PKR {Number(t.basePrice).toLocaleString()}</td>
                                     <td className="px-4 py-3 text-text-muted">{t._count?.bookings ?? 0}</td>
                                     <td className="px-4 py-3">
                                         <span className={`inline-flex px-2 py-0.5 rounded-full label ${t.isActive ? 'bg-primary-fixed text-primary' : 'bg-surface-container-high text-text-muted'}`}>

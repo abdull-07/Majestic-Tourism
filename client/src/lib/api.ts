@@ -36,8 +36,9 @@ api.interceptors.response.use(
 
                 return api(originalRequest);
             } catch (refreshError) {
+                const isAdminArea = window.location.pathname.startsWith('/admin');
                 useAuthStore.getState().logout();
-                window.location.href = '/admin/login';
+                window.location.href = isAdminArea ? '/admin/login' : '/login';
                 return Promise.reject(refreshError);
             } finally {
                 isRefreshing = false;

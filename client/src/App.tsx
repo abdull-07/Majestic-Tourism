@@ -13,6 +13,7 @@ const TourListing = lazy(() => import('./pages/public/TourListing'));
 const TourDetail = lazy(() => import('./pages/public/TourDetail'));
 const Gallery = lazy(() => import('./pages/public/Gallery'));
 const NotFound = lazy(() => import('./pages/public/NotFound'));
+const DashboardHome = lazy(() => import('./pages/dashboard/DashboardHome'));
 
 // Admin auth
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
@@ -30,11 +31,14 @@ const PaymentsList = lazy(() => import('./pages/admin/payments/PaymentsList'));
 const ReviewsList = lazy(() => import('./pages/admin/reviews/ReviewsList'));
 const BlogList = lazy(() => import('./pages/admin/blog/BlogList'));
 const BlogForm = lazy(() => import('./pages/admin/blog/BlogForm'));
-const ProtectedRoute = lazy(()=>import( './components/ProtectedRoute'));
-const UsersList = lazy(()=>import( './pages/admin/users/UsersList'));
-const CouponsList = lazy(()=>import( './pages/admin/coupons/CouponsList'));
-const CouponForm = lazy(()=>import( './pages/admin/coupons/CouponForm'));
+const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
+const UsersList = lazy(() => import('./pages/admin/users/UsersList'));
+const CouponsList = lazy(() => import('./pages/admin/coupons/CouponsList'));
+const CouponForm = lazy(() => import('./pages/admin/coupons/CouponForm'));
 const SettingsPage = lazy(() => import('./pages/admin/settings/SettingsPage'));
+const Register = lazy(() => import('./pages/public/Register'));
+const Login = lazy(() => import('./pages/public/Login'));
+const VerifyEmail = lazy(() => import('./pages/public/VerifyEmail'));
 
 function PageLoader() {
   return (
@@ -51,6 +55,9 @@ export default function App() {
         {/* ---------- Public storefront ---------- */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
           <Route path="/about" element={<About />} />
           <Route path="/destinations" element={<DestinationsListing />} />
           <Route path="/destinations/:slug" element={<DestinationDetail />} />
@@ -58,6 +65,16 @@ export default function App() {
           <Route path="/tours/:slug" element={<TourDetail />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="*" element={<NotFound />} />
+          <Route
+            element={
+              <ProtectedRoute
+                allowedRoles={['CUSTOMER', 'STAFF', 'ADMIN', 'SUPER_ADMIN']}
+                redirectTo="/login"
+              />
+            }
+          >
+            <Route path="/dashboard" element={<DashboardHome />} />
+          </Route>
         </Route>
 
         {/* ---------- Admin auth (no layout, no guard) ---------- */}

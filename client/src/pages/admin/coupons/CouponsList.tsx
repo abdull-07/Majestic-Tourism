@@ -70,8 +70,8 @@ export default function CouponsList() {
                                     <tr key={c.id} className="hover:bg-surface-container-low">
                                         <td className="px-4 py-3 font-mono font-semibold text-primary">{c.code}</td>
                                         <td className="px-4 py-3 text-on-surface">
-                                            {c.discountType === 'PERCENTAGE' ? `${c.discountValue}%` : `$${c.discountValue}`}
-                                            {c.minAmount && <span className="text-text-muted"> (min ${c.minAmount})</span>}
+                                            {c.discountType === 'PERCENTAGE' ? `${c.discountValue}%` : `PKR ${c.discountValue}`}
+                                            {c.minAmount && <span className="text-text-muted"> (min PKR {c.minAmount})</span>}
                                         </td>
                                         <td className="px-4 py-3 text-text-muted">
                                             {c.usedCount}{c.maxUses ? ` / ${c.maxUses}` : ' (unlimited)'}

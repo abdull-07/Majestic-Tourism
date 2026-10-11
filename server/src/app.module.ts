@@ -15,6 +15,7 @@ import { MediaModule } from './media/media.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SettingsModule } from './settings/settings.module';
 import { MailModule } from './mail/mail.module';
+import { AccountModule } from './account/account.module';
 
 @Module({
   imports: [
@@ -31,7 +32,8 @@ import { MailModule } from './mail/mail.module';
     UsersModule,
     MediaModule,
     DashboardModule,
-    SettingsModule
+    SettingsModule,
+    AccountModule
   ],
   controllers: [AppController],
   providers: [AppService],
