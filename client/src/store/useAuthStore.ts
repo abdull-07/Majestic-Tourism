@@ -17,6 +17,7 @@ type AuthState = {
     refreshToken: string | null;
     setSession: (user: User, accessToken: string, refreshToken: string) => void;
     setTokens: (accessToken: string, refreshToken: string) => void;
+    updateUser: (partial: Partial<User>) => void;
     logout: () => void;
 };
 
@@ -28,6 +29,7 @@ export const useAuthStore = create<AuthState>()(
             refreshToken: null,
             setSession: (user, accessToken, refreshToken) => set({ user, accessToken, refreshToken }),
             setTokens: (accessToken, refreshToken) => set({ accessToken, refreshToken }),
+            updateUser: (partial) => set((state) => ({ user: state.user ? { ...state.user, ...partial } : state.user })),
             logout: () => set({ user: null, accessToken: null, refreshToken: null }),
         }),
         { name: 'majestic-auth' },

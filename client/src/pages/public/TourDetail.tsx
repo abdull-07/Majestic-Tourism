@@ -6,6 +6,7 @@ import ItineraryAccordion from '../../components/public/tours/ItineraryAccordion
 import AvailabilityPicker from '../../components/public/tours/AvailabilityPicker';
 import ReviewsList from '../../components/public/tours/ReviewsList';
 import type { TourDetail as TourDetailType } from '../../types/tour';
+import WishlistButton from '../../components/WishlistButton';
 
 const FALLBACK_IMG = 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=1600';
 
@@ -40,6 +41,7 @@ export default function TourDetail() {
                         <MapPin size={14} /> {tour.destination.name}
                     </Link>
                     <h1 className="text-display-lg-mobile md:text-display-lg">{tour.title}</h1>
+                    <WishlistButton tourId={tour.id} className="absolute top-28 right-6 z-10" />
                 </div>
             </section>
 

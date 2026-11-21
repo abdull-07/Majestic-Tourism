@@ -94,16 +94,15 @@ export class AccountService {
         });
     }
 
-    async changePassword(userId: string, dto: ChangePasswordDto) {
-        const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    async getProfile(userId: string) {
+        const user = await this.prisma.user.findUnique({
+            where: { id: userId },
+            select: {
+                id: true, email: true, fullName: true, phone: true,
+                role: true, isEmailVerified: true, createdAt: true,
+            },
+        });
         if (!user) throw new NotFoundException('User not found');
-
-        const valid = await bcrypt.compare(dto.currentPassword, user.password);
-        if (!valid) throw new BadRequestException('Current password is incorrect');
-
-        const hashed = await bcrypt.hash(dto.newPassword, 10);
-        await this.prisma.user.update({ where: { id: userId }, data: { password: hashed } });
-
-        return { message: 'Password updated successfully' };
+        return user;
     }
 }   

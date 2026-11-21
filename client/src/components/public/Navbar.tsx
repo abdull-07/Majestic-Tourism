@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LogOut, User, ChevronDown } from 'lucide-react';
+import { Menu, X, LogOut, User, ChevronDown, Monitor} from 'lucide-react';
 import { useAuthStore } from '../../store/useAuthStore';
 
 const navLinks = [
@@ -43,11 +43,10 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-                scrolled
-                    ? 'bg-white/95 backdrop-blur-xl shadow-sm py-0'
-                    : 'bg-white/70 backdrop-blur-xl py-0'
-            } border-b border-glass-stroke`}
+            className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
+                ? 'bg-white/95 backdrop-blur-xl shadow-sm py-0'
+                : 'bg-white/70 backdrop-blur-xl py-0'
+                } border-b border-glass-stroke`}
         >
             <div className="wrapper flex justify-between items-center h-[72px]">
                 {/* Brand */}
@@ -66,11 +65,10 @@ export default function Navbar() {
                             <Link
                                 key={link.to}
                                 to={link.to}
-                                className={`px-4 py-2 rounded-full text-body-md font-medium transition-all duration-200 ${
-                                    isActive
-                                        ? 'text-primary bg-primary/5 font-semibold'
-                                        : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'
-                                }`}
+                                className={`px-4 py-2 rounded-full text-body-md font-medium transition-all duration-200 ${isActive
+                                    ? 'text-primary bg-primary/5 font-semibold'
+                                    : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'
+                                    }`}
                             >
                                 {link.label}
                             </Link>
@@ -92,9 +90,8 @@ export default function Navbar() {
                                 </div>
                                 <ChevronDown
                                     size={14}
-                                    className={`text-on-surface-variant transition-transform duration-200 hidden md:block ${
-                                        profileOpen ? 'rotate-180' : ''
-                                    }`}
+                                    className={`text-on-surface-variant transition-transform duration-200 hidden md:block ${profileOpen ? 'rotate-180' : ''
+                                        }`}
                                 />
                             </button>
 
@@ -114,11 +111,18 @@ export default function Navbar() {
                                             </p>
                                         </div>
                                         <Link
-                                            to="/profile"
+                                            to="/dashboard/profile"
                                             className="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
                                         >
                                             <User size={16} />
                                             My Profile
+                                        </Link>
+                                        <Link
+                                            to="/dashboard"
+                                            className="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                                        >
+                                            <Monitor size={16} />
+                                            Dashbord
                                         </Link>
                                         <button
                                             onClick={() => {
@@ -173,11 +177,10 @@ export default function Navbar() {
                                 <Link
                                     key={link.to}
                                     to={link.to}
-                                    className={`px-4 py-3 rounded-lg text-body-md font-medium transition-colors ${
-                                        isActive
-                                            ? 'text-primary bg-primary/5 font-semibold'
-                                            : 'text-on-surface-variant hover:text-primary hover:bg-slate-50'
-                                    }`}
+                                    className={`px-4 py-3 rounded-lg text-body-md font-medium transition-colors ${isActive
+                                        ? 'text-primary bg-primary/5 font-semibold'
+                                        : 'text-on-surface-variant hover:text-primary hover:bg-slate-50'
+                                        }`}
                                 >
                                     {link.label}
                                 </Link>

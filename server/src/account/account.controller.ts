@@ -35,8 +35,8 @@ export class AccountController {
         return this.accountService.updateProfile(userId, dto);
     }
 
-    @Patch('password')
-    changePassword(@CurrentUser('id') userId: string, @Body() dto: ChangePasswordDto) {
-        return this.accountService.changePassword(userId, dto);
+    @Get('profile')
+    getProfile(@CurrentUser('id') userId: string) {
+        return this.accountService.getProfile(userId);
     }
 }

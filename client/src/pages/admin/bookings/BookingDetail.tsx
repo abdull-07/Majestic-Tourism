@@ -77,7 +77,7 @@ export default function BookingDetail() {
                     <div className="text-body-sm space-y-1 text-text-muted">
                         <p>Departure: <span className="text-on-surface">{new Date(booking.availability.departureDate).toLocaleDateString()}</span></p>
                         <p>Travelers: <span className="text-on-surface">{booking.adults} adults, {booking.children} children</span></p>
-                        <p>Total: <span className="text-secondary font-semibold">${Number(booking.totalAmount).toLocaleString()}</span></p>
+                        <p>Total: <span className="text-secondary font-semibold">PKR {Number(booking.totalAmount).toLocaleString()}</span></p>
                         {booking.holdExpiresAt && (
                             <p>Hold expires: <span className="text-on-surface">{new Date(booking.holdExpiresAt).toLocaleString()}</span></p>
                         )}
@@ -98,7 +98,7 @@ export default function BookingDetail() {
                             {booking.payments.map((p) => (
                                 <tr key={p.id} className="border-b border-mountain-mist last:border-0">
                                     <td className="py-2">{p.method}</td>
-                                    <td className="py-2">${Number(p.amount).toLocaleString()}</td>
+                                    <td className="py-2">PKR {Number(p.amount).toLocaleString()}</td>
                                     <td className="py-2"><StatusBadge status={p.status} /></td>
                                     <td className="py-2 text-text-muted">{new Date(p.createdAt).toLocaleDateString()}</td>
                                 </tr>

@@ -31,7 +31,7 @@ export default function AdminDashboard() {
 
     const cards = [
         { label: 'Total Bookings', value: stats.totalBookings, icon: CalendarCheck },
-        { label: 'Total Revenue', value: `$${stats.totalRevenue.toLocaleString()}`, icon: TrendingUp },
+        { label: 'Total Revenue', value: `PKR ${stats.totalRevenue.toLocaleString()}`, icon: TrendingUp },
         { label: 'Active Tours', value: stats.totalTours, icon: Compass },
         { label: 'Customers', value: stats.totalCustomers, icon: Users },
     ];
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
                                         <p className="font-medium text-on-surface">{b.tourTitle}</p>
                                         <p className="text-text-muted">{b.customerName} · {b.bookingNumber}</p>
                                     </div>
-                                    <span className="text-secondary font-semibold">${Number(b.totalAmount).toLocaleString()}</span>
+                                    <span className="text-secondary font-semibold">PKR {Number(b.totalAmount).toLocaleString()}</span>
                                 </div>
                             ))}
                         </div>

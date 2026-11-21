@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Star } from 'lucide-react';
 import type { Tour } from '../../../types/tour';
+import WishlistButton from '../../WishlistButton';
 
 const FALLBACK_IMG = 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=800';
 
@@ -41,6 +42,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
                         <span className="text-white text-[10px] font-bold uppercase tracking-wider">Compare</span>
                     </label>
                 </div>
+                <WishlistButton tourId={tour.id} className="absolute top-4 right-4" />
             </div>
 
             <div className="p-6 flex flex-col flex-grow">

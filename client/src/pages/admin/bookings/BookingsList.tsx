@@ -70,7 +70,7 @@ export default function BookingsList() {
                                     <td className="px-4 py-3 text-on-surface">{b.tour.title}</td>
                                     <td className="px-4 py-3 text-text-muted">{b.user?.fullName || 'Guest'}</td>
                                     <td className="px-4 py-3 text-text-muted">{b.adults + b.children}</td>
-                                    <td className="px-4 py-3 text-secondary font-semibold">${Number(b.totalAmount).toLocaleString()}</td>
+                                    <td className="px-4 py-3 text-secondary font-semibold">PKR {Number(b.totalAmount).toLocaleString()}</td>
                                     <td className="px-4 py-3"><StatusBadge status={b.status} /></td>
                                     <td className="px-4 py-3 text-text-muted">{new Date(b.createdAt).toLocaleDateString()}</td>
                                 </tr>

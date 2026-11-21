@@ -13,7 +13,6 @@ const TourListing = lazy(() => import('./pages/public/TourListing'));
 const TourDetail = lazy(() => import('./pages/public/TourDetail'));
 const Gallery = lazy(() => import('./pages/public/Gallery'));
 const NotFound = lazy(() => import('./pages/public/NotFound'));
-const DashboardHome = lazy(() => import('./pages/dashboard/DashboardHome'));
 
 // Admin auth
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
@@ -39,6 +38,14 @@ const SettingsPage = lazy(() => import('./pages/admin/settings/SettingsPage'));
 const Register = lazy(() => import('./pages/public/Register'));
 const Login = lazy(() => import('./pages/public/Login'));
 const VerifyEmail = lazy(() => import('./pages/public/VerifyEmail'));
+
+// Customer pages — lazy loaded
+const DashboardLayout = lazy(() => import('./layouts/DashboardLayout'));
+const DashboardHome = lazy(() => import('./pages/dashboard/DashboardHome'));
+const MyBookings = lazy(() => import('./pages/dashboard/MyBookings'));
+const MyBookingDetail = lazy(() => import('./pages/dashboard/MyBookingDetail'));
+const ProfilePage = lazy(() => import('./pages/dashboard/ProfilePage'));
+const Wishlist = lazy(() => import('./pages/dashboard/Wishlist'));
 
 function PageLoader() {
   return (
@@ -73,7 +80,13 @@ export default function App() {
               />
             }
           >
-            <Route path="/dashboard" element={<DashboardHome />} />
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element={<DashboardHome />} />
+              <Route path="wishlist" element={<Wishlist />} />
+              <Route path="bookings" element={<MyBookings />} />
+              <Route path="bookings/:id" element={<MyBookingDetail />} />
+              <Route path="profile" element={<ProfilePage />} />
+            </Route>
           </Route>
         </Route>
 
